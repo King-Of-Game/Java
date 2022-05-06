@@ -1,0 +1,27 @@
+/**
+ * @author: YiXuan
+ * @project: java_demo
+ * @software: IntelliJ IDEA
+ * @date: 2022/5/6 0:17
+ */
+
+package com.jack.tools;
+
+public class RandomTools {
+    /**
+     * 生成一个随机数，范围：1~100
+     * @return int
+     */
+    public static int randomNumber100() {
+        return (int) (Math.random() * 100 + 1);
+    }
+
+
+    /**
+     * 生成一个随机数，范围：1~1000
+     * @return int
+     */
+    public static int randomNumber1000() {
+        return (int) (Math.random() * 1000 + 1);
+    }
+}
