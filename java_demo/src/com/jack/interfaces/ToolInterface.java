@@ -15,4 +15,5 @@ package com.jack.interfaces;
  * 标记接口作用：简单形象的说就是给某个对象打个标（盖个戳），使对象拥有某个或某些特权。
  */
 public interface ToolInterface extends DateInterface, FileInterface, RandomInterface{
+
 }

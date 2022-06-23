@@ -5,7 +5,7 @@
  * @date: 2022/4/27 11:57
  */
 
-package com.jack.interfaces;
+package com.jack.tools.interfaces;
 
  public interface DateInterface {
      long oneDayMilliseconds = 60*60*24*1000;

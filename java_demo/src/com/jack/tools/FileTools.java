@@ -7,20 +7,30 @@
 
 package com.jack.tools;
 
+import com.jack.tools.interfaces.FileInterface;
+
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FileTools {
+public class FileTools implements FileInterface {
+    private static FileTools instance = null;
+    public static synchronized FileTools getInstance(){
+        if (instance == null){
+            instance = new FileTools();
+        }
+        return instance;
+    }
+
 
 
     /**
      * 创建目录
      * @param dirPath 目录路径
      */
-    public static void createDir(String dirPath){
+    public boolean createDir(String dirPath){
         File dir = new File(dirPath);
-        dir.mkdirs();
+        return dir.mkdirs();
     }
 
 
@@ -29,7 +39,7 @@ public class FileTools {
      * @param filePath 文件路径: "test\\jack.txt"
      * @param content 写入文本内容
      */
-    public static void writeTextToFile(String filePath, String content){
+    public void writeTextToFile(String filePath, String content){
         // 先根据文件路径创建目录，否则找不到路径 FileOutputStream 对象会报错
         String dirPath = getDirPathInFilePath(filePath);
         createDir(dirPath);
@@ -61,7 +71,7 @@ public class FileTools {
      * 从文件中读取文本
      * @param filePath 文件路径: "test\\jack.txt"
      */
-    public static void readTextFromFile(String filePath){
+    public void readTextFromFile(String filePath){
         File file = new File(filePath);
         try{
             // 构建FileInputStream对象
@@ -87,15 +97,47 @@ public class FileTools {
 
 
     /**
+     * 递归创建文件
+     * @param count 计数
+     * @param num 循环次数
+     * @param type 0: 梯度创建文件, 1: 平行创建文件
+     * @param dirPath 指定路径
+     * @param dirName 指定名称创建文件夹
+     * @param fileName 指定名称创建文件
+     */
+    public void recursionCreateFile(int count, int num, int type, String dirPath, String dirName, String fileName){
+        if (count > num){
+            System.out.println("创建完成");
+        }
+        else {
+            String newDirName = dirName + count;
+            String newDirPath = dirPath + "\\" + newDirName;
+            String filePath = newDirPath + "\\" + fileName;
+            String textContent = count + "";
+            // 梯度创建
+            if (type == 0){
+                writeTextToFile(filePath, textContent);
+                recursionCreateFile(count+1, num, type, newDirPath, dirName, fileName);
+            }
+            // 平行创建
+            else {
+                writeTextToFile(filePath, textContent);
+                recursionCreateFile(count+1, num, type, dirPath, dirName, fileName);
+            }
+        }
+    }
+
+
+    /**
      *  递归删除目录及其中的文件
      * @param dirPath 目录路径: "data/"
      */
-    public static void recursionDelFolder(String dirPath){
+    public void recursionDelFolder(String dirPath){
         File folder = new File(dirPath);
         delFolder(folder);
         System.out.println("删除完成！");
     }
-    private static void delFolder(File folder){
+    private void delFolder(File folder){
         getInfoByFolder(folder);
         File[] files = folder.listFiles();
         if (files != null){
@@ -118,7 +160,7 @@ public class FileTools {
      * 获取指定路径下的信息
      * @param dirPath 目录路径: "data/"
      */
-    public static void getInfoByDirPath(String dirPath){
+    public void getInfoByDirPath(String dirPath){
         File folder = new File(dirPath);
         getInfoByFolder(folder);
     }
@@ -127,7 +169,7 @@ public class FileTools {
      * 获取指定目录下的信息
      * @param folder java File对象
      */
-    private static void getInfoByFolder(File folder){
+    private void getInfoByFolder(File folder){
         if (folder.isDirectory() && folder.exists()){
             System.out.printf("指定路径: %s\n", folder);
             for (String obj : folder.list()){
@@ -150,7 +192,7 @@ public class FileTools {
     /**
      * 获取当前项目根目录路径
      */
-    public static String getProjectPath(){
+    public String getProjectPath(){
         String ProjectPath = System.getProperty("user.dir");
         return ProjectPath;
     }
@@ -161,7 +203,7 @@ public class FileTools {
      * @param filePath 文件路径: "C:\test\jack.txt"
      * @return string "C:\test\"
      */
-    public static String getDirPathInFilePath(String filePath) {
+    public String getDirPathInFilePath(String filePath) {
         String regex=".+\\\\";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(filePath);

@@ -25,18 +25,6 @@ public class UseDate {
 //        string_to_date();
 //        calc_time();
 
-
-        long timestamp = DateTools.getToday0Timestamp(0);
-        System.out.println(timestamp);
-
-
-        String formatTime = DateTools.timestampToStr(timestamp);
-        System.out.println(formatTime);
-
-
-        timestamp = DateTools.strTimeToTimestamp(formatTime, 1);
-        System.out.println(timestamp);
-
     }
 
     /*

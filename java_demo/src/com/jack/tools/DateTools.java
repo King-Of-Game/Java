@@ -7,18 +7,34 @@
 
 package com.jack.tools;
 
+import com.jack.tools.interfaces.DateInterface;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateTools {
+public class DateTools implements DateInterface {
+    private static DateTools instance = null;
+    public static synchronized DateTools getInstance(){
+        if (instance == null){
+            instance = new DateTools();
+        }
+        return instance;
+    }
+
+
+    private final long timestamp = System.currentTimeMillis();
+
+
+
+
+
     /**
      * 获取当前时间戳
      * @param type 0: 10位时间戳(精确到秒), 1: 13位时间戳(精确到毫秒)
      * @return long
      */
-    public static long getNowTimestamp(int type){
-        long timestamp = System.currentTimeMillis();
+    public long getNowTimestamp(int type){
         if (type == 0){
             return timestamp/1000;
         }
@@ -33,9 +49,7 @@ public class DateTools {
      * @param type 0: 10位时间戳(精确到秒), 1: 13位时间戳(精确到毫秒)
      * @return long
      */
-    public static long getToday0Timestamp(int type){
-        long timestamp = System.currentTimeMillis();
-        long oneDayMilliseconds = 60*60*24*1000;
+    public long getToday0Timestamp(int type){
         long Today0Timestamp = timestamp - (timestamp + 60*60*8*1000) % oneDayMilliseconds;
         if (type == 0){
             return Today0Timestamp/1000;
@@ -51,8 +65,7 @@ public class DateTools {
      * @param time 时间戳
      * @return "yyyy-MM-dd HH:mm:ss"
      */
-    public static String timestampToStr(long time){
-        String format = "yyyy-MM-dd HH:mm:ss";
+    public String timestampToStr(long time){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         int length = String.valueOf(time).length();
         if (length == 10){
@@ -75,8 +88,8 @@ public class DateTools {
      * @param type 0: 10位时间戳, 1: 13位时间戳
      * @return long 时间戳
      */
-    public static long strTimeToTimestamp(String formatTime, int type){
-        String format = "yyyy-MM-dd HH:mm:ss";
+    public long strTimeToTimestamp(String formatTime, int type){
+        
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         try {
             long timestamp = simpleDateFormat.parse(formatTime).getTime();
@@ -96,7 +109,7 @@ public class DateTools {
      * 当前执行线程休眠
      * @param millis: 毫秒
      */
-    public static void threadSleep(int millis){
+    public void threadSleep(int millis){
         try {
             Thread.sleep(millis);
         }catch (InterruptedException i){

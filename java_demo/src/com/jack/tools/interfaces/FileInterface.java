@@ -5,7 +5,7 @@
  * @date: 2022/4/27 14:29
  */
 
-package com.jack.interfaces;
+package com.jack.tools.interfaces;
 
 public interface FileInterface {
 
@@ -13,7 +13,7 @@ public interface FileInterface {
      * 创建目录
      * @param dirPath 目录路径
      */
-    public void createDir(String dirPath);
+    public boolean createDir(String dirPath);
 
 
     /**
@@ -29,6 +29,18 @@ public interface FileInterface {
      * @param filePath 文件路径: "test\\jack.txt"
      */
     public void readTextFromFile(String filePath);
+
+
+    /**
+     * 递归创建文件
+     * @param count 计数
+     * @param num 循环次数
+     * @param type 0: 梯度创建文件, 1: 平行创建文件
+     * @param dirPath 指定路径
+     * @param dirName 指定名称创建文件夹
+     * @param fileName 指定名称创建文件
+     */
+    public void recursionCreateFile(int count, int num, int type, String dirPath, String dirName, String fileName);
 
 
     /**

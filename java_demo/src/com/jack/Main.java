@@ -14,9 +14,9 @@ public class Main {
     }
 
     private static void testUtil(){
-        Util util = new Util();
-        System.out.println(util.randomNumber100());
-        System.out.println(util.randomNumber1000());
+//        Util util = new Util();
+//        System.out.println(util.randomNumber100());
+//        System.out.println(util.randomNumber1000());
     }
 
 

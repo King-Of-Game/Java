@@ -5,7 +5,7 @@
  * @date: 2022/5/6 0:02
  */
 
-package com.jack.interfaces;
+package com.jack.tools.interfaces;
 
 public interface RandomInterface {
 

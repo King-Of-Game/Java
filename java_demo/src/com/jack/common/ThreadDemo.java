@@ -45,9 +45,9 @@ public class ThreadDemo extends Thread{
 
 
 
-        long timestamp = DateTools.getNowTimestamp(0);
-        String timeStr = DateTools.timestampToStr(timestamp);
-        System.out.printf("%d -> %s \n", timestamp, timeStr);
+//        long timestamp = DateTools.getNowTimestamp(0);
+//        String timeStr = DateTools.timestampToStr(timestamp);
+//        System.out.printf("%d -> %s \n", timestamp, timeStr);
     }
 
 

@@ -13,8 +13,10 @@ import com.jack.tools.FileTools;
 public class UseStream {
     public static void main(String[] args) {
 
-        recursionCreateFile(1, 2, 1, "data", "test", "jack.txt");
-        FileTools.recursionDelFolder("data");
+        FileTools fileTools = FileTools.getInstance();
+        fileTools.recursionCreateFile(1, 2, 1, "data", "test", "jack.txt");
+
+
     }
 
 
@@ -27,7 +29,7 @@ public class UseStream {
      * @param dirName 指定名称创建文件夹
      * @param fileName 指定名称创建文件
      */
-    private static void recursionCreateFile(int count, int num, int type, String dirPath, String dirName, String fileName){
+  /*  private static void recursionCreateFile(int count, int num, int type, String dirPath, String dirName, String fileName){
         if (count > num){
             System.out.println("创建完成");
         }
@@ -47,7 +49,7 @@ public class UseStream {
                 recursionCreateFile(count+1, num, type, dirPath, dirName, fileName);
             }
         }
-    }
+    }*/
 
 
 

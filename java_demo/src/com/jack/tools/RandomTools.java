@@ -7,12 +7,23 @@
 
 package com.jack.tools;
 
-public class RandomTools {
+import com.jack.tools.interfaces.RandomInterface;
+
+public class RandomTools implements RandomInterface {
+    private static RandomTools instance = null;
+    public static synchronized RandomTools getInstance(){
+        if (instance == null){
+            instance = new RandomTools();
+        }
+        return instance;
+    }
+
+
     /**
      * 生成一个随机数，范围：1~100
      * @return int
      */
-    public static int randomNumber100() {
+    public int randomNumber100() {
         return (int) (Math.random() * 100 + 1);
     }
 
@@ -21,7 +32,7 @@ public class RandomTools {
      * 生成一个随机数，范围：1~1000
      * @return int
      */
-    public static int randomNumber1000() {
+    public int randomNumber1000() {
         return (int) (Math.random() * 1000 + 1);
     }
 }
