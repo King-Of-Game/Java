@@ -9,8 +9,8 @@ package com.jack.common;
 import java.util.*;
 
 public class MemoryTable {
-    private Hashtable<String,String> hashtable;
-    private String tabName;
+    private final Hashtable<String,String> hashtable;
+    private final String tabName;
 
 
     MemoryTable(String tabName){
